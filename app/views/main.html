@@ -1,0 +1,46 @@
+<style>
+  .selected td {
+    background-color: #f0f0f0 !important;
+  }
+</style>
+
+<script>
+
+function advance(){
+  //alert('click');
+  count = count +1;
+}
+
+</script>
+
+<div ng-controller="Ballerz">
+  <h2>Current Inning: {{ count }}</h2>
+  <button type="button" ng-click="increment()">Count</button>
+  <button type="button" ng-click="givePoints()">Test</button>
+
+  <h4>Ball On:</h4>
+  <button type="button" ng-click="ballerTurn = ballerTurn + 1; points = points + 1" ng-init="ballerTurn = 0; points = 1">Baller Turn</button>
+  count: {{ count % ballerz.length }}
+  baller: {{ ballerz[ballerTurn % ballerz.length].name}}
+  <br/>
+  <button type="button" ng-click="total = points; points = 1; ballerTurn = ballerTurn + 1" ng-init="total = 0">Give</button>
+  count: {{ count % ballerz.length }}
+  baller: {{ ballerz[ballerTurn % ballerz.length].name}}
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Name:</td>
+        <td>Points</td>
+        <td>Total</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-class="{selected: $index==(ballerTurn % ballerz.length)}" ng-repeat="baller in ballerz">
+        <td>{{ baller.name }}</td>
+        <td>{{ points }}</td>
+        <td>{{ baller.total }}</td>
+      </tr ng-repeat-end>
+    </tbody>
+  </table>
+</div>
