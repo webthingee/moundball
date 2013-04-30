@@ -6,39 +6,29 @@
 
 <script>
 
-function advance(){
-  //alert('click');
-  count = count +1;
-}
-
 </script>
 
 <div ng-controller="Ballerz">
-  <h2>Current Inning: {{ count }}</h2>
-  <button type="button" ng-click="increment()">Count</button>
-  <button type="button" ng-click="givePoints()">Test</button>
+  <h2 class="panel" ng-init="counter = 0; inning = 0; $scope.ballerTurn = 0">{{ homeAway }}{{ inning }}</h2>
+  <button type="button" ng-click="halfInning()">Start</button>
+  <button type="button" ng-click="offMound()">OFF Mound</button>
+  <button type="button" ng-click="onMound()">ON Mound</button>
 
-  <h4>Ball On:</h4>
-  <button type="button" ng-click="ballerTurn = ballerTurn + 1; points = points + 1" ng-init="ballerTurn = 0; points = 1">Baller Turn</button>
-  count: {{ count % ballerz.length }}
-  baller: {{ ballerz[ballerTurn % ballerz.length].name}}
-  <br/>
-  <button type="button" ng-click="total = points; points = 1; ballerTurn = ballerTurn + 1" ng-init="total = 0">Give</button>
-  count: {{ count % ballerz.length }}
-  baller: {{ ballerz[ballerTurn % ballerz.length].name}}
+  <h4>Current Baller:</h4>
+  <div class="panel">{{ ballerz[ballerTurn % ballerz.length].name }}</div>
+  <h4>Points Pool:</h4>
+  <div class="panel">{{ points }}</div>
 
-  <table class="table table-striped">
+  <table width="100%">
     <thead>
       <tr>
         <td>Name:</td>
-        <td>Points</td>
         <td>Total</td>
       </tr>
     </thead>
     <tbody>
       <tr ng-class="{selected: $index==(ballerTurn % ballerz.length)}" ng-repeat="baller in ballerz">
         <td>{{ baller.name }}</td>
-        <td>{{ points }}</td>
         <td>{{ baller.total }}</td>
       </tr ng-repeat-end>
     </tbody>
