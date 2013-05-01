@@ -9,10 +9,10 @@
 </script>
 
 <div ng-controller="Ballerz">
-  <h2 class="panel" ng-init="counter = 0; inning = 0; $scope.ballerTurn = 0">{{ homeAway }}{{ inning }}</h2>
-  <button type="button" ng-click="halfInning()">Start</button>
-  <button type="button" ng-click="offMound()">OFF Mound</button>
-  <button type="button" ng-click="onMound()">ON Mound</button>
+  <h2 class="panel" ng-init="inning='MoundBall'">{{ homeAway }}{{ inning }}</h2>
+  <button type="button" ng-hide="started" ng-click="start()">Start</button>
+  <button type="button" ng-click="offMound()" ng-show="started">OFF Mound</button>
+  <button type="button" ng-click="onMound()" ng-show="started">ON Mound</button>
 
   <h4>Current Baller:</h4>
   <div class="panel">{{ ballerz[ballerTurn % ballerz.length].name }}</div>
@@ -23,7 +23,7 @@
     <thead>
       <tr>
         <td>Name:</td>
-        <td>Total</td>
+        <td>Total:</td>
       </tr>
     </thead>
     <tbody>
@@ -33,4 +33,6 @@
       </tr ng-repeat-end>
     </tbody>
   </table>
+  <button type="button" ng-show="started" ng-click="start()">Reset</button>
+
 </div>

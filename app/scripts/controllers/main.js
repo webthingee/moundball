@@ -10,27 +10,41 @@ angular.module('moundballApp')
   })
   .controller('Ballerz', function ($scope) {
     $scope.ballerz = [
-      { name: 'Julie', row: '21', seat: '20', total: 0 },
-      { name: 'Dave', row: '21', seat: '19', total: 0 },
-      { name: 'Malia', row: '21', seat: '18', total: 0 },
-      { name: 'Sean', row: '21', seat: '17', total: 0 }
+      { name: 'Jose Sandval', row: '21', seat: '20', total: 0 },
+      { name: 'Billy Bobbers', row: '21', seat: '19', total: 0 },
+      { name: 'Hubert Franz', row: '21', seat: '18', total: 0 },
+      { name: 'Colby Nanod', row: '21', seat: '17', total: 0 }
     ];
 
+    // set variables
     $scope.ballerTurn = 0;
     $scope.points = 0;
+    $scope.started = false;
 
-    // ballerTimer
-
-    $scope.increment = function() { $scope.count++; };
+    // register functions
+    $scope.start = function() { start($scope); };
     $scope.halfInning = function() { halfInning($scope); };
     $scope.onMound = function() { onMound($scope) };
     $scope.offMound = function() { offMound($scope) };
   });
 
 
+function start($scope) {
+  $scope.counter = 0;
+  $scope.inning = 0;
+  $scope.points = 0;
+  for(var i=0; i < $scope.ballerz.length; i++) {
+    $scope.ballerz[i].total = 0;
+  }
+  halfInning($scope);
+  $scope.ballerTurn = 0;
+  $scope.started = true;
+
+}
+
 function halfInning($scope) {
   // Change to correct half inning.
-  //
+
   // Take one point from each baller.
   for(var i=0; i < $scope.ballerz.length; i++) {
     $scope.ballerz[i].total = (-1 + $scope.ballerz[i].total);
@@ -88,6 +102,6 @@ function onMound($scope) {
   // Add new points.
   halfInning($scope);
 
-  console.log(ballerCurrent.name);
-  console.log(ballerCurrentTotal + $scope.points);
+  console.log($scope.ballerz);
+  //console.log(ballerCurrentTotal + $scope.points);
 }
