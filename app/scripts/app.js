@@ -7,6 +7,10 @@ angular.module('moundballApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/:name', {
+        templateUrl: 'views/test.html',
+        controller: 'PagesController'
+      })
       .otherwise({
         redirectTo: '/'
       });

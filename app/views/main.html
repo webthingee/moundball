@@ -9,30 +9,50 @@
 </script>
 
 <div ng-controller="Ballerz">
-  <h2 class="panel" ng-init="inning='MoundBall'">{{ homeAway }}{{ inning }}</h2>
-  <button type="button" ng-hide="started" ng-click="start()">Start</button>
-  <button type="button" ng-click="offMound()" ng-show="started">OFF Mound</button>
-  <button type="button" ng-click="onMound()" ng-show="started">ON Mound</button>
+    <div class="row">
 
-  <h4>Current Baller:</h4>
-  <div class="panel">{{ ballerz[ballerTurn % ballerz.length].name }}</div>
-  <h4>Points Pool:</h4>
-  <div class="panel">{{ points }}</div>
+      <h4 class="panel" ng-init="inning='MoundBall'" ng-ini="homeAway = Beginning">{{ homeAway }} of the {{ inning }}</h4>
 
-  <table width="100%">
-    <thead>
-      <tr>
-        <td>Name:</td>
-        <td>Total:</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-class="{selected: $index==(ballerTurn % ballerz.length)}" ng-repeat="baller in ballerz">
-        <td>{{ baller.name }}</td>
-        <td>{{ baller.total }}</td>
-      </tr ng-repeat-end>
-    </tbody>
-  </table>
-  <button type="button" ng-show="started" ng-click="start()">Reset</button>
+      <button class="small-3 columns large" type="button" ng-click="offMound()" ng-show="inningActive">OFF Mound</button>
 
-</div>
+      <div class="panel small-6 columns" ng-show="inningActive">{{ ballerz[ballerTurn % ballerz.length].name }}</div>
+
+      <button type="button" class="small-12 columns large" ng-hide="inningActive" ng-click="anteUp()">Ante Up</button>
+
+      <button class="small-3 columns large" type="button" ng-click="onMound()" ng-show="inningActive">ON Mound</button>
+
+    </div><!-- /.row -->
+
+    <div class="row">
+      <table width="100%">
+        <thead>
+          <tr class="panel">
+            <td>Current Points Wagered:</td>
+            <td>{{ points|currency:$ }}</td>
+          </tr>          <tr>
+            <td>Name:</td>
+            <td>Total:</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-class="{selected: $index==(ballerTurn % ballerz.length)}" ng-repeat="baller in ballerz">
+            <td>{{ baller.name }}</td>
+            <td>{{ baller.total|currency:$ }}</td>
+          </tr ng-repeat-end>
+        </tbody>
+      </table>
+    </div><!-- /.row -->
+
+    <div class="row">
+      <h4>History:</h4>
+      <div class="panel">
+        <ul>
+          <li ng-repeat="inning in inningResultz">{{ inning.inningHalf }} of the {{ inning.inningNumber }}, ball came to rest <b>{{ inning.ballResult }}</b> the Mound.</li>
+        </ul>
+      </div>
+    </div><!-- /.row -->
+
+    <div class="row">
+      <button type="button" class="large expand" ng-show="started" ng-click="reset()">Reset</button>
+    </div><!-- /.row -->
+</div><!-- /^ng-controller -->
